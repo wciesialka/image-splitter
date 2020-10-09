@@ -7,9 +7,9 @@ class ImageSplitter:
     def __init__(self,data,dpi=72.0,paper_w=8.5,paper_h=11):
         self.image = Image.open(BytesIO(data))
         self.cells = []
-        self.dpi = (dpi,dpi)
-        self.pwpx = self.dpi[0]*paper_w # Paper Width in Pixels
-        self.phpx = self.dpi[1]*paper_h
+        self.pw = paper_w
+        self.ph = paper_h
+        self.dpi = dpi
     
     @property
     def width(self):
@@ -32,18 +32,23 @@ class ImageSplitter:
                     base = Image.new('RGB', (dx, dy), (255, 255, 255))
                     crop = self.image.crop((x,y,max(x+dx-1,self.width),max(y+dy-1,self.height))) # If the border isn't perfect, paste it onto a
                     base.paste(crop)                                                             # blank image so we retain the same size
+
                     if scale:
-                        if dx >= dy:
-                            ratio = self.pwpx / dx
+                        w,h = base.size
+
+                        if (w*self.pw) >= (h*self.ph):
+                            r = (self.pw*self.dpi)/w
                         else:
-                            ratio = self.phpx / dy
-                        base = base.resize( (floor(dx*ratio),floor(dy*ratio)) )
+                            r = (self.ph*self.dpi)/h
+                        nw = w*r
+                        nh = h*r
+                        base = base.resize( (floor(nw),floor(nh)) )
 
                     self.cells.append(base)
 
     def export(self):
         contents = None
         with BytesIO() as output:
-            self.cells[0].save(output,"PDF",resolution=100.0, dpi=self.dpi, save_all=True, append_images=self.cells[1:])
+            self.cells[0].save(output,"PDF",resolution=100.0, dpi=(self.dpi,self.dpi), save_all=True, append_images=self.cells[1:])
             contents = output.getvalue()
         return contents

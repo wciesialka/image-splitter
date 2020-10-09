@@ -17,7 +17,7 @@ if __name__=="__main__":
     parser.add_argument('-n', '--columns', type=int, help="Number of columns.",default=3)
     parser.add_argument('-k', '--rows', type=int, help="Number of rows.", default=3)
     parser.add_argument('-s','--noscale',action='store_true',default=False,help="Disable automatic scaling.")
-    parser.add_argument('-d','--dpi',type=float,help="Specify dpi.",default=72.0)
+    parser.add_argument('-d','--dpi',type=float,help="DPI.",default=300)
     parser.add_argument('-w','--paperwidth',type=float,help="Specify Paper Width in inches.",default=8.5)
     parser.add_argument('-y','--paperheight',type=float,help="Specify Paper Height in inches.",default=11)
     parser.add_argument('-o','--output',type=argparse.FileType('wb'), help="Output file",default=open("out.pdf","wb"))
