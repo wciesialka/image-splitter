@@ -7,7 +7,7 @@ def main(args):
     splitter = ImageSplitter.ImageSplitter(data,dpi=args['dpi'],paper_w=args['paperwidth'],paper_h=args['paperheight'])
     splitter.split(cols=args['columns'],rows=args['rows'],scale=(not args['noscale']))
     out = splitter.export()
-    with open("test.pdf","wb") as f:
+    with args['output'] as f:
         f.write(out)
     
 
@@ -20,5 +20,6 @@ if __name__=="__main__":
     parser.add_argument('-d','--dpi',type=float,help="Specify dpi.",default=72.0)
     parser.add_argument('-w','--paperwidth',type=float,help="Specify Paper Width in inches.",default=8.5)
     parser.add_argument('-y','--paperheight',type=float,help="Specify Paper Height in inches.",default=11)
+    parser.add_argument('-o','--output',type=argparse.FileType('wb'), help="Output file",default=open("out.pdf","wb"))
     args = parser.parse_args()
     main(vars(args))
