@@ -106,3 +106,35 @@ class PrinterPaper:
                 raise ValueError(f"Length of dpi should be 2, not {len(value)}.")
         else:
             raise TypeError(f"dpi should be type tuple, not type {value.__class__.__name__}.")
+
+    # If the user has PIL installed, we should include a helper method for fitting an image onto
+    # a PrinterPaper.
+
+    try:
+        import PIL.Image as Image
+    except:
+        pass
+    else:
+        from math import floor
+
+        def fit_image(self,image: Image.Image) -> Image.Image:
+            '''
+            Scale an image to fit on the PrinterPaper while keeping the image's aspect ratio.
+
+            Arguments:
+                image (PIL.Image.Image): The image to scale.
+
+            Returns:
+                new_image (PIL.Image.Image): The image scaled.
+            '''
+
+            w,h = image.size
+            if (w*self.pixel_width) >= (h*self.pixel_height):
+                ratio = (self.pixel_width)/w
+            else:
+                ratio = (self.pixel_height)/h
+
+            nw = floor(w*r)
+            nh = floor(h*r)
+
+            return image.resize((nw,nh))
