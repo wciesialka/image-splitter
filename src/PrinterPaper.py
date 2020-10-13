@@ -25,16 +25,19 @@ class PrinterPaper:
     @property
     def pixel_width(self) -> float:
         '''Return width of paper in pixels.'''
+        
         return self.width * self.dpi[0]
 
     @property
     def pixel_height(self) -> float:
         '''Return height of paper in pixels.'''
+
         return self.height * self.dpi[1]
 
     @property
     def width(self) -> float:
         '''Return width of paper in inches.'''
+
         return self.__width
 
     @width.setter
@@ -44,6 +47,7 @@ class PrinterPaper:
         Arguments:
             value (float): New width in inches.
         '''
+
         try:
             value = float(value)
         except:
@@ -57,6 +61,7 @@ class PrinterPaper:
     @property
     def height(self) -> float:
         '''Return height of paper in inches.'''
+
         return self.__height
 
     @height.setter
@@ -66,6 +71,7 @@ class PrinterPaper:
         Arguments:
             value (float): New height in inches.
         '''
+
         try:
             value = float(value)
         except:
@@ -79,10 +85,17 @@ class PrinterPaper:
     @property
     def dpi(self) -> tuple:
         '''Return DPI of printer.'''
+
         return self.__dpi
 
     @dpi.setter
     def dpi(self,value:tuple):
+        '''Set DPI of printer.
+
+        Arguments:
+            value (tuple): New DPI in form (width,height).
+        '''
+
         if isinstance(value,tuple):
             if len(value) == 2:
                 if (isinstance(value[0],int) or isinstance(value[0],float)) and (isinstance(value[1],int) or isinstance(value[1],float)):
