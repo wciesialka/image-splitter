@@ -117,9 +117,9 @@ class PrinterPaper:
     else:
         from math import floor
 
-        def fit_image(self,image: Image.Image) -> Image.Image:
+        def fill_image(self,image: Image.Image) -> Image.Image:
             '''
-            Scale an image to fit on the PrinterPaper while keeping the image's aspect ratio.
+            Scale an image to fill the PrinterPaper while keeping the image's aspect ratio.
 
             Arguments:
                 image (PIL.Image.Image): The image to scale.
