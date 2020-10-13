@@ -24,19 +24,19 @@ class PrinterPaper:
 
     @property
     def pixel_width(self) -> float:
-        '''Return width of paper in pixels.'''
+        '''Width of paper in pixels.'''
 
         return self.width * self.dpi[0]
 
     @property
     def pixel_height(self) -> float:
-        '''Return height of paper in pixels.'''
+        '''Height of paper in pixels.'''
 
         return self.height * self.dpi[1]
 
     @property
     def width(self) -> float:
-        '''Return width of paper in inches.'''
+        '''Width of paper in inches.'''
 
         return self.__width
 
@@ -60,7 +60,7 @@ class PrinterPaper:
 
     @property
     def height(self) -> float:
-        '''Return height of paper in inches.'''
+        '''Height of paper in inches.'''
 
         return self.__height
 
@@ -84,7 +84,7 @@ class PrinterPaper:
 
     @property
     def dpi(self) -> tuple:
-        '''Return DPI of printer.'''
+        '''DPI of printer in form (width,height).'''
 
         return self.__dpi
 
