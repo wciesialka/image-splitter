@@ -25,7 +25,7 @@ class PrinterPaper:
     @property
     def pixel_width(self) -> float:
         '''Return width of paper in pixels.'''
-        
+
         return self.width * self.dpi[0]
 
     @property
@@ -56,7 +56,7 @@ class PrinterPaper:
             if value > 0:
                 self.__width = value
             else:
-                raise ValueError(f"width should be greater than zero, not {value}")
+                raise ValueError(f"width should be greater than zero, not {value}.")
 
     @property
     def height(self) -> float:
@@ -80,7 +80,7 @@ class PrinterPaper:
             if value > 0:
                 self.__height = value
             else:
-                raise ValueError(f"height should be greater than zero, not {value}")
+                raise ValueError(f"height should be greater than zero, not {value}.")
 
     @property
     def dpi(self) -> tuple:
@@ -103,6 +103,6 @@ class PrinterPaper:
                 else:
                     raise TypeError(f"dpi should be a tuple of types (float,float), not tuple of types ({value[0].__class__.__name__},{value[1].__class__.__name__}).")
             else:
-                raise ValueError(f"Length of dpi should be 2, not {len(value)}")
+                raise ValueError(f"Length of dpi should be 2, not {len(value)}.")
         else:
             raise TypeError(f"dpi should be type tuple, not type {value.__class__.__name__}.")
