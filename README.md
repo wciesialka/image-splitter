@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/dynamic/json?color=informational&label=Python&prefix=v&query=%24.python&url=https%3A%2F%2Fgithub.com%2Fwciesialka%2Fimage-splitter%2Fblob%2Fmain%2Finfo.json) ![](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Version&prefix=v&query=%24.version&url=https%3A%2F%2Fgithub.com%2Fwciesialka%2Fimage-splitter%2Fblob%2Fmain%2Finfo.json)
+![](https://img.shields.io/badge/dynamic/json?color=informational&label=Python&prefix=v&query=%24.python&url=https%3A%2F%2Fraw.githubusercontent.com%2Fwciesialka%2Fimage-splitter%2Fmain%2Finfo.json) ![](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Version&prefix=v&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fwciesialka%2Fimage-splitter%2Fmain%2Finfo.json)
 
 # image-splitter
 Split an image into multiple columns or rows and serve as a printable PDF.
