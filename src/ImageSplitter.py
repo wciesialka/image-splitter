@@ -43,9 +43,9 @@ def split_image(image:Image.Image,cols:int,rows:int) -> list:
         dy = ceil(h / rows)
         for y in range(0,h,dy):
             for x in range(0,w,dx):
-                base = Image.new('RGBA', (dx, dy), (255, 255, 255, 0))
-                crop = image.crop((x,y,max(x+dx-1,w),max(y+dy-1,h))) # If the border isn't perfect, paste it onto
-                base.paste(crop)                                     # a blank image so we retain the same size
+                base = Image.new('RGBA', (dx, dy), (0,0,0,0))
+                crop = image.crop((x,y,min(x+dx-1,w),min(y+dy-1,h))) # If the border isn't perfect, paste it onto
+                base.paste(crop,(0,0))                               # a blank image so we retain the same size
 
                 images.append(base)
         
