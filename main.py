@@ -11,11 +11,7 @@ def main(args):
     paper = PrinterPaper.PrinterPaper(args['paperwidth'],args['paperheight'],dpi)
     splits = ImageSplitter.split_image(img,args['columns'],args['rows'])
 
-    pdf = []
-    for v in [paper.fill_image(v) for v in splits]:
-        base = Image.new("RGB",v.size,"WHITE")
-        base.paste(v,(0,0),mask=v.getchannel('A'))
-        pdf.append(base)
+    pdf = [paper.fill_image(v) for v in splits]
     
     with args['output'] as f:
         pdf[0].save(f,save_all=True, append_images=pdf[1:], dpi = dpi)
