@@ -1,7 +1,7 @@
 from PIL import Image
 from math import ceil, floor
 
-def split_image(image:Image.Image,cols:int,rows:int) -> list:
+def split_image(image:Image.Image,cols:int,rows:int,*,alpha:bool = False) -> list:
     '''
     Split an image into (cols * rows) images, with "cols" columns and "rows" rows.
 
@@ -9,6 +9,9 @@ def split_image(image:Image.Image,cols:int,rows:int) -> list:
         image (PIL.Image.Image): Image to split.
         cols (int): Number of columns to split image into.
         rows (int): Number of rows to split image into.
+
+    Keyword Arguments:
+        alpha (bool): If true, then the resulting split images will have an alpha border if they do not evenly fit. The border will be white otherwise.
     
     Returns:
         images (list): List of length (cols*rows) containing the image "splits."
@@ -43,7 +46,10 @@ def split_image(image:Image.Image,cols:int,rows:int) -> list:
         dy = ceil(h / rows)
         for y in range(0,h,dy):
             for x in range(0,w,dx):
-                base = Image.new('RGBA', (dx, dy), (0,0,0,0))
+                if alpha:
+                    base = Image.new('RGBA', (dx, dy), (0,0,0,0))
+                else:
+                    base = Image.new('RGB', (dx,dy), "WHITE")
                 crop = image.crop((x,y,min(x+dx-1,w),min(y+dy-1,h))) # If the border isn't perfect, paste it onto
                 base.paste(crop,(0,0))                               # a blank image so we retain the same size
 
