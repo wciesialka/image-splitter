@@ -1,3 +1,5 @@
+from math import floor
+
 class PrinterPaper:
     '''
     A class that represents a piece of paper that would have an image printed on it.
@@ -118,7 +120,6 @@ class PrinterPaper:
     except:
         pass
     else:
-        from math import floor
 
         def fill_image(self,image: Image.Image) -> Image.Image:
             '''
@@ -137,7 +138,7 @@ class PrinterPaper:
             else:
                 ratio = (self.pixel_height)/h
 
-            nw = floor(w*r)
-            nh = floor(h*r)
+            nw = floor(w*ratio)
+            nh = floor(h*ratio)
 
             return image.resize((nw,nh))
