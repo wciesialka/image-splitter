@@ -98,10 +98,13 @@ class PrinterPaper:
 
         if isinstance(value,tuple):
             if len(value) == 2:
-                if (isinstance(value[0],int) or isinstance(value[0],float)) and (isinstance(value[1],int) or isinstance(value[1],float)):
-                    self.__dpi = value
-                else:
+                try:
+                    x = float(value[0])
+                    y = float(value[1])
+                except:
                     raise TypeError(f"dpi should be a tuple of types (float,float), not tuple of types ({value[0].__class__.__name__},{value[1].__class__.__name__}).")
+                else:
+                    self.__dpi = (x,y)
             else:
                 raise ValueError(f"Length of dpi should be 2, not {len(value)}.")
         else:
@@ -137,4 +140,4 @@ class PrinterPaper:
             nw = floor(w*r)
             nh = floor(h*r)
 
-            return image.resize((nw,nh))
+            return image.resize((nw,nh))q
