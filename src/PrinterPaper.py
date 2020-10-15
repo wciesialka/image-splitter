@@ -140,4 +140,4 @@ class PrinterPaper:
             nw = floor(w*r)
             nh = floor(h*r)
 
-            return image.resize((nw,nh))q
+            return image.resize((nw,nh))
