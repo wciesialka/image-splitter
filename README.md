@@ -7,13 +7,13 @@ Split an image into multiple columns or rows and serve as a printable PDF.
 
 ### Prerequisites
 
-This project was made using **Python 3.8.5**. Also required is **pip**.
+This project was made using **Python 3.8.5**. Also required is **pip**. Details on how to install pip can be found [on their website](https://pip.pypa.io/en/stable/installing/).
 
 The following Python packages are required:
 
 `Pillow`
 
-These can be found in [requirements.txt] and can be installed using `pip install -r requirements.txt`.
+These can be found in [requirements.txt](requirements.txt) and can be installed using `pip install -r requirements.txt`.
 
 ## Usage
 
@@ -33,11 +33,11 @@ options:
 
 ## Examples
 
-Examples can be found in the [examples] directory.
+Examples can be found in the [examples](examples) directory.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE] for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Authors
 
