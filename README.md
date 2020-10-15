@@ -31,6 +31,10 @@ options:
     -o, --output        File to output to (defaults to out.pdf).
 ```
 
+## Examples
+
+Examples can be found in the [examples] directory.
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE] for details.
