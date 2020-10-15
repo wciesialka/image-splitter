@@ -1,54 +1,52 @@
 from PIL import Image
-from io import BytesIO
 from math import ceil, floor
 
-class ImageSplitter:
+def split_image(image:Image.Image,cols:int,rows:int) -> list:
+    '''
+    Split an image into (cols * rows) images, with "cols" columns and "rows" rows.
 
-    def __init__(self,data,dpi=72.0,paper_w=8.5,paper_h=11):
-        self.image = Image.open(BytesIO(data))
-        self.cells = []
-        self.pw = paper_w
-        self.ph = paper_h
-        self.dpi = dpi
+    Arguments:
+        image (PIL.Image.Image): Image to split.
+        cols (int): Number of columns to split image into.
+        rows (int): Number of rows to split image into.
     
-    @property
-    def width(self):
-        return self.image.size[0]
+    Returns:
+        images (list): List of length (cols*rows) containing the image "splits."
+    '''
 
-    @property
-    def height(self):
-        return self.image.size[1]
+    if isinstance(image,Image.Image):
+        pass
+    else:
+        raise TypeError(f"image should be type PIL.Image.Image, not type {image.__class__.__name__}.")
 
-    def split(self,cols,rows,scale=True):
-        if cols > self.width or cols < 1:
-            raise ValueError(f"Invalid column value {cols}. Value must be 1 <= n < {self.width} (Image Width).")
-        elif rows > self.height or rows < 1:
-            raise ValueError(f"Invalid row value {rows}. Value must be 1 <= n < {self.height} (Image Height).")
-        else:
-            dx = ceil(self.width / cols)
-            dy = ceil(self.height / rows)
-            for y in range(0,self.height,dy):
-                for x in range(0,self.width,dx):
-                    base = Image.new('RGB', (dx, dy), (255, 255, 255))
-                    crop = self.image.crop((x,y,max(x+dx-1,self.width),max(y+dy-1,self.height))) # If the border isn't perfect, paste it onto a
-                    base.paste(crop)                                                             # blank image so we retain the same size
+    try:
+        cols = int(cols)
+    except:
+        raise TypeError(f"cols should be type int, not type {cols.__class__.__name__}.")
 
-                    if scale:
-                        w,h = base.size
+    try:
+        rows = int(rows)
+    except:
+        raise TypeError(f"rows should be type int, not type {rows.__class__.__name__}.")
 
-                        if (w*self.pw) >= (h*self.ph):
-                            r = (self.pw*self.dpi)/w
-                        else:
-                            r = (self.ph*self.dpi)/h
-                        nw = w*r
-                        nh = h*r
-                        base = base.resize( (floor(nw),floor(nh)) )
+    w,h = image.size
 
-                    self.cells.append(base)
+    if cols > w or cols < 1:
+        raise ValueError(f"Invalid column value {cols}. Value must be 1 <= n < {w} (Image Width).")
+    elif rows > h or rows < 1:
+        raise ValueError(f"Invalid row value {rows}. Value must be 1 <= n < {h} (Image Height).")
+    else:
+        
+        images = []
 
-    def export(self):
-        contents = None
-        with BytesIO() as output:
-            self.cells[0].save(output,"PDF",resolution=100.0, dpi=(self.dpi,self.dpi), save_all=True, append_images=self.cells[1:])
-            contents = output.getvalue()
-        return contents
+        dx = ceil(w / cols)
+        dy = ceil(h / rows)
+        for y in range(0,h,dy):
+            for x in range(0,w,dx):
+                base = Image.new('RGBA', (dx, dy), (255, 255, 255, 0))
+                crop = image.crop((x,y,max(x+dx-1,w),max(y+dy-1,h))) # If the border isn't perfect, paste it onto
+                base.paste(crop)                                     # a blank image so we retain the same size
+
+                images.append(base)
+        
+        return images
