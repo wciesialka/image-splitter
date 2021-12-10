@@ -5,7 +5,7 @@ Split an image into multiple columns or rows and serve as a printable PDF.
 
 ### Installation
 
-You can run `setup.py` through `./setup.py install` or `python3 setup.py install`.
+There are many ways you can install. For the most specific, clone the repository and run `setup.py install`. Otherwise, you can install from pip with `pip install imagesplitter`
 
 ### Usage
 
